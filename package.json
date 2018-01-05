@@ -1,0 +1,23 @@
+{
+  "name": "busboard",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshAdamPowell/BusBoardJS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoshAdamPowell/BusBoardJS/issues"
+  },
+  "homepage": "https://github.com/JoshAdamPowell/BusBoardJS#readme",
+  "dependencies": {
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5"
+  }
+}
