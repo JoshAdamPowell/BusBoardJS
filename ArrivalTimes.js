@@ -6,16 +6,16 @@ module.exports = {getArrivalTimes: getArrivalTimes}
 function getArrivalTimes(stopID){
 
 
-	const promise = request.get('https://api.tfl.gov.uk/StopPoint/' + stopID + '/Arrivals')
+	const arrivalsPromise = request.get('https://api.tfl.gov.uk/StopPoint/' + stopID + '/Arrivals')
 
 
-	const promiseOfTimeToTwoDP = promise.then((val) => processJSON(val));
+	arrivalsPromise.then((val) => processJSON(val));
 
 	function processJSON(json) {
-		var objects = JSON.parse(json)
-		objects.sort(function(a,b) { return a.timeToStation - b.timeToStation })
-		objects.length = 5
-		objects.forEach(arrival => console.log(stringForArrival(arrival)))
+		var arrivalsData = JSON.parse(json)
+		arrivalsData.sort(function(a,b) { return a.timeToStation - b.timeToStation })
+		arrivalsData.length = 5
+		arrivalsData.forEach(arrival => console.log(stringForArrival(arrival)))
 	}
 
 	function stringForArrival(arrival) {
