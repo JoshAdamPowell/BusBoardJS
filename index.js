@@ -27,7 +27,6 @@ function arrivalsDataFromBusStops(busStops) {
 	var arrivalTimesPromises = [];
 	for (const busStop of busStops) {
 		const arrivalTimesPromise = arrivalTimes.getArrivalTimes(busStop).then(arrivalTimes => {
-			console.log(arrivalTimes)
 			return {
 				id: busStop,
 				arrivals: arrivalTimes
