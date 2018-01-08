@@ -7,14 +7,16 @@
     <script src="departures.js"></script>
 </head>
 <body>
+<header>
 <h1>BusBoard</h1>
 <form action="javascript:void(0)" onsubmit="getArrivalTimes(postcode.value)">
     Postcode:<br>
     <input type="text" name="postcode">
     <input type="submit" value="Submit">
 </form>
+</header>
 <div id="results">
-    Type in a postcode and see the results!
+    <p id="defaultText">Type in a postcode and see the results!</p>
 </div>
 </body>
 </html>

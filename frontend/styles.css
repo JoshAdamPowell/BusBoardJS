@@ -1,6 +1,33 @@
+@import "normalize.css";
 * {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+header {
+    width: 100%;
+    height: 20em;
+    background-color: rgb(220, 36, 31);
+    color: white;
+    text-align: center;
+    postition: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+#defaultText {
+    text-align: center;
+    font-style: italic;
+}
+
+#results {
+    max-width: 28em;
+    position: relative;
+    margin: 0 auto;
+}
+
+
+/* Table styling */
 
 th:first-child, td:first-child {
     width: 3em;

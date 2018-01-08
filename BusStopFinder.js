@@ -10,11 +10,16 @@ function busStopsByLocation(lat, long){
 
 function processJson(inputString){
 	let busArray = []
-	busStopData = JSON.parse(inputString)
-	stopPointData = busStopData.stopPoints
+	const busStopData = JSON.parse(inputString)
+	var stopPointData = busStopData.stopPoints
 	stopPointData.sort(function(a,b) { return a.distance - b.distance })
 	stopPointData = stopPointData.filter(stop => stop.lines.length != 0) // because some bus stops don't exist
 	stopPointData.length = 2
-	stopPointData.forEach(stop => busArray.push({id : stop.id, commonName : stop.commonName}))
+	console.log(inputString)
+	stopPointData.forEach(stop => busArray.push({
+		id : stop.id,
+		commonName : stop.commonName,
+		stopLetter: stop.stopLetter,
+	}))
 	return busArray
 }

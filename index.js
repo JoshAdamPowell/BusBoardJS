@@ -27,23 +27,20 @@ function departureBoard(request, result) {
 function arrivalsDataFromBusStops(busStops) {
 	var arrivalTimesPromises = [];
 	for (const busStop of busStops) {
-		busStopId = busStop.id
-		busStopName = busStop.commonName
+		const busStopId = busStop.id
+		const busStopName = busStop.commonName
 		const arrivalTimesPromise = arrivalTimes.getArrivalTimes(busStopId).then(arrivalTimes => {
 			return {
-				id: busStopId,
-				commonName: busStopName,
-				arrivals: arrivalTimes
+				stopData: busStop,
+				arrivals: arrivalTimes,
 			}
 		})
 		arrivalTimesPromises.push(arrivalTimesPromise)
 	}
 	const combinedArrivalsPromise = Promise.all(arrivalTimesPromises)
 	return combinedArrivalsPromise.then((results) => {
-		console.log(results)
 
 		const stringFromResults = JSON.stringify(results)
-		console.log(stringFromResults)
 		return stringFromResults
 	})
 }
