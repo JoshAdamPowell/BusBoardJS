@@ -6,6 +6,10 @@ const busStopFinder = require ('./BusStopFinder')
 const express = require('express')
 
 
+const errors = {
+	BadPostcodeError: 1
+}
+
 // Start the server
 const app = express()
 
@@ -21,6 +25,15 @@ function departureBoard(request, result) {
 	const outputPromise = busStopsPromise.then(arrivalsDataFromBusStops)
 	outputPromise.then((output) => {
 		result.send(output)
+	}).catch(err => {
+		if (err.statusCode === 404) {
+			if (JSON.parse(err.error).error == "Invalid postcode") {
+				result.status(400).send(JSON.stringify({
+					errno: errors.BadPostcodeError,
+					message: "Invalid postcode"
+				}))
+			}
+		}
 	})
 }
 
@@ -49,7 +62,3 @@ function busStopsByPostcode(postcode) {
 	const locationPromise = postcodeLookup.locationOfPostcode(postcode)
 	return locationPromise.then(latlong => busStopFinder.busStopsByLocation(...latlong))
 }
-
-// postcodeLookup.locationOfPostcode("NW5 1TL").then(val => busStopFinder.busStopsByLocation(...val).then(val => console.log(val)))
-//
-// arrivalTimes.getArrivalTimes("490008660N")

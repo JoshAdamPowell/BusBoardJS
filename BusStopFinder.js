@@ -15,7 +15,6 @@ function processJson(inputString){
 	stopPointData.sort(function(a,b) { return a.distance - b.distance })
 	stopPointData = stopPointData.filter(stop => stop.lines.length != 0) // because some bus stops don't exist
 	stopPointData.length = 2
-	console.log(inputString)
 	stopPointData.forEach(stop => busArray.push({
 		id : stop.id,
 		commonName : stop.commonName,
