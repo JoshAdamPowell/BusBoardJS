@@ -19,8 +19,14 @@ function getArrivalTimes (postcode) {
 	}
 
 	xhttpWeather.onload = function() {
-		console.log("changing image")
+		if (xhttpWeather.status != 200) {
+			console.log(xhttpWeather.response)
+			document.getElementById("imageBox").src = ""
+			document.getElementById("imageBox").style.display = "none";
+			return
+		}
 		document.getElementById("imageBox").src = "http://openweathermap.org/img/w/" + xhttpWeather.response + ".png"
+		document.getElementById("imageBox").style.display = "block";
 
 	}
 

@@ -7,8 +7,17 @@ function weatherBoard(req, result){
 	const postcode = req.query.postcode
 	const postcodePromise = postcodeLookup.locationOfPostcode(postcode)
 	const iconPromise = postcodePromise.then(val => weatherByLocation(...val))
-	iconPromise.then(val => result.send(val))
-
+	iconPromise.then(val => result.send(val)).catch(err => {
+		if (err.statusCode === 404) {
+			const errorString = JSON.parse(err.error).error
+			if (errorString == "Invalid postcode" || errorString == "Postcode not found") {
+				result.status(400).send(JSON.stringify({
+					errno: 1,
+					message: "Invalid postcode"
+				}))
+			}
+		}
+	})
 }
 
 

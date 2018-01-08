@@ -29,7 +29,8 @@ function departureBoard(request, result) {
 		result.send(output)
 	}).catch(err => {
 		if (err.statusCode === 404) {
-			if (JSON.parse(err.error).error == "Invalid postcode") {
+			const errorString = JSON.parse(err.error).error
+			if (errorString == "Invalid postcode" || errorString == "Postcode not found") {
 				result.status(400).send(JSON.stringify({
 					errno: errors.BadPostcodeError,
 					message: "Invalid postcode"

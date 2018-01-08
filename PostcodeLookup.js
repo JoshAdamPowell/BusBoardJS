@@ -17,7 +17,6 @@ function processJson(stringInput){
 		return [lat, long]
 	}
 	else {
-		//TODO: Throw a better exception
 		throw postcodeData
 	}
 

@@ -1,6 +1,10 @@
 @import "normalize.css";
 * {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Gill Sans MT", "Gill Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+    font-size: 1.3em;
 }
 
 header {
@@ -13,11 +17,21 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    padding-top: 5em;
+    padding-top: 4em;
+}
+
+#imageBox {
+    float: right;
+    display: none;
 }
 
 header h1 {
     font-size: 4em;
+    font-weight: normal;
+}
+
+h2, h3, th {
+    font-weight: normal;
 }
 
 #defaultText {
@@ -25,30 +39,92 @@ header h1 {
     font-style: italic;
 }
 
-#results {
+#resultsPane {
     max-width: 28em;
     position: relative;
     margin: 0 auto;
 }
 
 
+/* Form styling */
+
+header form {
+    font-size: 1.3em
+}
+
+input {
+    font-family: "Gill Sans MT"
+}
+
+input[type=text] {
+    background-color: transparent;
+    color: white;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(255,255,255,0.6);
+    transition: border 0.2s linear;
+
+}
+input[type=text]:focus {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid white;
+}
+input[type=text]::placeholder {
+    color: rgba(255,255,255,0.6);
+    font-style: italic;
+}
+
+input[type=submit] {
+    background-color: white; /* Green */
+    border: 2px solid white;
+    color: rgb(220, 36, 31);
+    padding: 0.1em 0.6em;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 2em;
+    outline: none;
+}
+
+input[type=submit]:active {
+    background-color: rgb(220, 36, 31);
+    color: white;
+}
+
+input[type=text]:-webkit-autofill {
+    background-color: transparent;
+    ourline: none;
+}
+
 /* Table styling */
 
 th:first-child, td:first-child {
     width: 3em;
-    color: palevioletred;
 }
 
 th:last-child, td:last-child {
     width: 10em;
-    color: blue;
 }
 
 th:nth-child(2), td:nth-child(2) {
     width: 15em;
-    color: green;
 }
 
 th {
     text-align: left
+}
+
+tr:nth-child(odd) {
+    background-color: rgba(220, 36, 31, 0.1)
+}
+
+tr:first-child {
+    background-color: rgba(220, 36, 31, 1);
+    color: white;
+}
+
+
+td, th {
+    border: 0;
+    padding: 0.1em 0.3em;
 }
