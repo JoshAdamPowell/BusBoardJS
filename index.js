@@ -10,6 +10,7 @@ const express = require('express')
 const app = express()
 
 // Listen for connections on /departureBoard
+app.use(express.static('frontend'));
 app.get('/departureBoard', departureBoard)
 
 app.listen(3000)
@@ -26,9 +27,12 @@ function departureBoard(request, result) {
 function arrivalsDataFromBusStops(busStops) {
 	var arrivalTimesPromises = [];
 	for (const busStop of busStops) {
-		const arrivalTimesPromise = arrivalTimes.getArrivalTimes(busStop).then(arrivalTimes => {
+		busStopId = busStop.id
+		busStopName = busStop.commonName
+		const arrivalTimesPromise = arrivalTimes.getArrivalTimes(busStopId).then(arrivalTimes => {
 			return {
-				id: busStop,
+				id: busStopId,
+				commonName: busStopName,
 				arrivals: arrivalTimes
 			}
 		})
@@ -36,7 +40,10 @@ function arrivalsDataFromBusStops(busStops) {
 	}
 	const combinedArrivalsPromise = Promise.all(arrivalTimesPromises)
 	return combinedArrivalsPromise.then((results) => {
+		console.log(results)
+
 		const stringFromResults = JSON.stringify(results)
+		console.log(stringFromResults)
 		return stringFromResults
 	})
 }
