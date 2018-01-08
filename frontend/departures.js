@@ -1,10 +1,9 @@
 function getArrivalTimes (postcode) {
 
-	document.getElementById('results').innerHTML=`<p>Loading</p>`
-
-
 	var xhttpWeather = new XMLHttpRequest();
 	var xhttpArrivals = new XMLHttpRequest();
+	window.loadingArrivals = true;
+	loadingIndicator(0)
 
 	xhttpArrivals.open('GET', 'http://localhost:3000/departureBoard?postcode=' + postcode, true);
 	xhttpWeather.open('GET', 'http://localhost:3000/weatherBoard?postcode=' + postcode, true);
@@ -33,6 +32,7 @@ function getArrivalTimes (postcode) {
 
 	xhttpArrivals.onload = function() {
 		let arrivalsObject = JSON.parse(xhttpArrivals.response)
+		window.loadingArrivals = false
 		if (xhttpArrivals.status != 200) {
 			if (arrivalsObject.errno == 1) {
 				document.getElementById("results").innerHTML = `<p>That's not a postcode.</p>`
@@ -44,7 +44,7 @@ function getArrivalTimes (postcode) {
 		}
 
 		if (arrivalsObject.length !== 0) {
-			document.getElementById("results").innerHTML = `    <h2>Bus stops near ${postcode}</h2>
+			document.getElementById("results").innerHTML = `    <h2>Bus stops near ${postcode.toUpperCase()}</h2>
     
     <h3>${readableStopName(arrivalsObject[0].stopData)}</h3>
     	${listItemsForArrivals(arrivalsObject[0].arrivals)}
@@ -58,6 +58,16 @@ function getArrivalTimes (postcode) {
 
 	xhttpArrivals.send();
 	xhttpWeather.send();
+
+}
+
+function loadingIndicator(n) {
+	if (window.loadingArrivals == false) {
+		return
+	}
+	document.getElementById('results').innerHTML=`<p>Loading` + ".".repeat(n)
+ + `</p>`
+	window.setTimeout(() => loadingIndicator((n+1) % 4), 200)
 }
 
 function readableStopName(stopData) {
