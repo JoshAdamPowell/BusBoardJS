@@ -2,21 +2,32 @@ function getArrivalTimes (postcode) {
 
 	document.getElementById('results').innerHTML=`<p>Loading</p>`
 
-	var xhttp = new XMLHttpRequest();
 
-	xhttp.open('GET', 'http://localhost:3000/departureBoard?postcode=' + postcode, true);
+	var xhttpWeather = new XMLHttpRequest();
+	var xhttpArrivals = new XMLHttpRequest();
 
-	xhttp.timeout = 5000
+	xhttpArrivals.open('GET', 'http://localhost:3000/departureBoard?postcode=' + postcode, true);
+	xhttpWeather.open('GET', 'http://localhost:3000/weatherBoard?postcode=' + postcode, true);
 
-	xhttp.setRequestHeader('Content-Type', 'application/json');
+	xhttpArrivals.timeout = 5000
 
-	xhttp.ontimeout = function () {
+	xhttpWeather.setRequestHeader('Content-Type', 'application/json');
+	xhttpArrivals.setRequestHeader('Content-Type', 'application/json');
+
+	xhttpArrivals.ontimeout = function () {
 		document.getElementById("results").innerHTML = `<p>Our server seems to be having a bother. Maybe try again?</p>`
 	}
 
-	xhttp.onload = function() {
-		let arrivalsObject = JSON.parse(xhttp.response)
-		if (xhttp.status != 200) {
+	xhttpWeather.onload = function() {
+		console.log("changing image")
+		document.getElementById("imageBox").src = "http://openweathermap.org/img/w/" + xhttpWeather.response + ".png"
+
+	}
+
+
+	xhttpArrivals.onload = function() {
+		let arrivalsObject = JSON.parse(xhttpArrivals.response)
+		if (xhttpArrivals.status != 200) {
 			if (arrivalsObject.errno == 1) {
 				document.getElementById("results").innerHTML = `<p>That's not a postcode.</p>`
 			} else {
@@ -39,7 +50,8 @@ function getArrivalTimes (postcode) {
 		}
 	}
 
-	xhttp.send();
+	xhttpArrivals.send();
+	xhttpWeather.send();
 }
 
 function readableStopName(stopData) {

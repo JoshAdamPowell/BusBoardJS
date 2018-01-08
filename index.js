@@ -4,6 +4,7 @@ const arrivalTimes = require ('./ArrivalTimes')
 const postcodeLookup = require ('./PostcodeLookup')
 const busStopFinder = require ('./BusStopFinder')
 const express = require('express')
+const weather = require('./weather')
 
 
 const errors = {
@@ -16,6 +17,7 @@ const app = express()
 // Listen for connections on /departureBoard
 app.use(express.static('frontend'));
 app.get('/departureBoard', departureBoard)
+app.get('/weatherBoard', weather.weatherBoard)
 
 app.listen(3000)
 
