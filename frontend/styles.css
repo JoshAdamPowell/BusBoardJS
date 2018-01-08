@@ -1,0 +1,22 @@
+* {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+th:first-child, td:first-child {
+    width: 3em;
+    color: palevioletred;
+}
+
+th:last-child, td:last-child {
+    width: 10em;
+    color: blue;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 15em;
+    color: green;
+}
+
+th {
+    text-align: left
+}

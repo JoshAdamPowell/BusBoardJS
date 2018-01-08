@@ -13,10 +13,12 @@ function getArrivalTimes (postcode) {
 		document.getElementById("results").innerHTML = `    <h2>Results</h2>
     <h3>${arrivalsObject[0].commonName}</h3>
     <table>
+    <tr><th> Line </th> <th> Destination</th> <th> Time to arrival</th></tr>
     	${listItemsForArrivals(arrivalsObject[0].arrivals)}
     	</table>
     <h3>${arrivalsObject[1].commonName}</h3>
     <table>
+    <tr><th> Line </th> <th> Destination</th> <th> Time to arrival</th></tr>
     	${listItemsForArrivals(arrivalsObject[1].arrivals)}
     </table>`;
 	}
