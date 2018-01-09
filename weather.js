@@ -25,7 +25,7 @@ function weatherBoard(req, result){
 
 function weatherByLocation(lat, long){
 
-	const weatherPromise = request.get('http://samples.openweathermap.org/data/2.5/weather?lat='+ lat + '&lon=' + long + '&appid=37888eaa1abb65c2bf3243d85aa09ec4')
+	const weatherPromise = request.get('http://api.openweathermap.org/data/2.5/weather?lat='+ lat + '&lon=' + long + '&appid=37888eaa1abb65c2bf3243d85aa09ec4')
 
 	return weatherPromise.then(val => processJSON(val))
 }
